@@ -36,7 +36,7 @@ jobs:
       - name: 'Bump versions'
         run: |
           npm --no-git-tag-version version "${{ github.event.milestone.title }}"
-          sed -i 's/^Version: [0-9].*$/Version: ${{ github.event.milestone.title }}/' style.css
+          sed -i 's/^Version: [0-9].*$/Version: ${{ github.event.milestone.title }}/' reading-time.php
 
       - name: 'Build the theme'
         run: 'npm run-script build'
@@ -57,7 +57,7 @@ jobs:
         run: |
           git config --global user.name 'Dennis Claassen'
           git config --global user.email 'd-claassen@users.noreply.github.com'
-          git add package.json package-lock.json style.css
+          git add package.json package-lock.json reading-time.php
           git commit -m 'Release version ${{ github.event.milestone.title }}'
           git tag ${{ github.event.milestone.title }}
           git push --follow-tags
