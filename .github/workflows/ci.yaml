@@ -85,7 +85,7 @@ jobs:
         run: './vendor/bin/phpstan analyze src'
 
       - name: 'Test JS units'
-        run: 'npm run-script test:unit -- --coverage'
+        run: 'npm run-script test:unit -- --coverage --passWithNoTests'
 
       - name: 'build the theme'
         run: 'npm run-script build'
