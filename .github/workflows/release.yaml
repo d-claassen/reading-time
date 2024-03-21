@@ -36,7 +36,7 @@ jobs:
       - name: 'Bump versions'
         run: |
           npm --no-git-tag-version version "${{ github.event.milestone.title }}"
-          sed -i 's/^Version: [0-9].*$/Version: ${{ github.event.milestone.title }}/' style.css
+          sed -i 's/^Version: [0-9].*$/Version: ${{ github.event.milestone.title }}/' reading-time.php
 
       - name: 'Build the theme'
         run: 'npm run-script build'
