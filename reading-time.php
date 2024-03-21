@@ -11,7 +11,7 @@ if ( ! function_exists( 'reading_time_setup' ) ) :
 	 * Note that this function is hooked into the after_setup_theme hook, which runs
 	 * before the init hook.
 	 */
-	function dc23_setup(): void {
+	function reading_time_setup(): void {
 		( new \DC23\ReadingTime\Schema_Integration() )->register();
 	}
 endif;
