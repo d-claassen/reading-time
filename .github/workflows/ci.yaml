@@ -73,7 +73,7 @@ jobs:
         run: 'npm run-script lint:js'
 
       - name: 'Lint CSS'
-        run: 'npm run-script lint:css'
+        run: 'npm run-script lint:css -- --allow-empty-input'
 
       - name: 'Lint PHP'
         run: 'composer lint'
