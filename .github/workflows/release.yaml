@@ -1,0 +1,100 @@
+name: 'Release version'
+
+on:
+  milestone:
+    types: [closed]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    name: 'Create release with notes'
+
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v4
+
+      - name: 'Setup Node and node_modules cache'
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: 'Setup PHP'
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: xdebug
+
+      - name: 'NPM install'
+        run: npm install
+
+      - name: 'Composer install'
+        run: 'composer install --no-dev --prefer-dist --no-progress --no-suggest --optimize-autoloader'
+
+      - name: 'Bump versions'
+        run: |
+          npm --no-git-tag-version version "${{ github.event.milestone.title }}"
+          sed -i 's/^Version: [0-9].*$/Version: ${{ github.event.milestone.title }}/' style.css
+
+      - name: 'Build the theme'
+        run: 'npm run-script build'
+
+      - name: 'Zip it'
+        run: 'npm run-script plugin-zip -- --help'
+
+      - name: 'Create release notes'
+        uses: docker://decathlon/release-notes-generator-action:2.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FILENAME: Changelog
+
+      - name: Test 1
+        run: ls -la
+
+      - name: 'Push the tag (directly)'
+        run: |
+          git config --global user.name 'Dennis Claassen'
+          git config --global user.email 'd-claassen@users.noreply.github.com'
+          git add package.json package-lock.json style.css
+          git commit -m 'Release version ${{ github.event.milestone.title }}'
+          git tag ${{ github.event.milestone.title }}
+          git push --follow-tags
+
+      # - name: 'Push the tag'
+      #   uses: actions-ecosystem/action-push-tag@v1
+      #   with:
+      #     tag: ${{ github.event.milestone.title }}
+
+      - name: Test 2
+        run: ls -la
+
+      - name: 'Archive plugin.zip'
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'reading-time'
+          path: 'reading-time.zip'
+
+      - name: 'Release'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.milestone.title }}
+          body_path: 'release_file.md'
+          files: 'reading-time.zip'
+          prerelease: false
+
+      - name: 'Get next milestone version'
+        id: next_version
+        uses: "WyriHaximus/github-action-next-semvers@v1"
+        with:
+          version: ${{ github.event.milestone.title }}
+
+      - name: Create Milestone
+        uses: WyriHaximus/github-action-create-milestone@v1.2.0
+        with:
+          title: ${{ steps.next_version.outputs.minor }}
+          # description: '"Next Release. The semver size might be altered after creation."'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

@@ -1,0 +1,66 @@
+{
+	"name": "d-claassen/reading-time",
+	"description": "A WordPress plugin focused on reading time.",
+	"type": "project",
+	"authors": [
+		{
+			"name": "Dennis Claassen",
+			"email": "declaassen@gmail.com"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"DC23\\ReadingTime\\": "src/"
+		}
+	},
+	"require-dev": {
+		"yoast/yoastcs": "^3.0",
+		"phpunit/phpunit": "^10.5.13",
+		"brain/monkey": "^2.6",
+		"yoast/wordpress-seo": "^22.3",
+		"antecedent/patchwork": "^2.1.28",
+		"brain/faker": "dev-master",
+		"phpstan/phpstan": "^1.10",
+		"szepeviktor/phpstan-wordpress": "^1.3",
+		"phpstan/extension-installer": "^1.3",
+		"mockery/mockery": "^1.3.1"
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true,
+			"composer/installers": true,
+			"infection/extension-installer": true,
+			"phpstan/extension-installer": true
+		},
+		"platform": {
+			"php": "8.2.14"
+		}
+	},
+	"scripts": {
+		"lint": [
+			"@php ./vendor/bin/parallel-lint . -e php --show-deprecated --exclude vendor --exclude .git"
+		],
+		"cs": [
+			"@php ./vendor/bin/phpcs --runtime-set ignore_warnings_on_exit 1"
+		],
+		"test": [
+			"@php ./vendor/bin/phpunit --process-isolation"
+		],
+		"test:start": [
+			"echo $WP_DEVELOP_DIR",
+			"cd $WP_DEVELOP_DIR && npm run env:start"
+		],
+		"test:stop": [
+			"echo $WP_DEVELOP_DIR",
+			"cd $WP_DEVELOP_DIR && npm run env:stop"
+		],
+		"test-once": [
+			"@test:start",
+			"@test",
+			"@test:stop"
+		]
+	},
+	"extra": {
+		"installer-disable": true
+	}
+}
