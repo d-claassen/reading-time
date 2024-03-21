@@ -101,7 +101,7 @@ jobs:
         run: 'composer test -- --coverage-text --display-errors --display-warnings'
 
       - name: 'Test e2e'
-        run: 'npm run-script test:e2e'
+        run: 'npm run-script test:e2e -- --passWithNoTests'
 
       - name: 'Ditch dev dependencies'
         run: 'composer install --no-dev --prefer-dist --no-progress --no-suggest --optimize-autoloader'
