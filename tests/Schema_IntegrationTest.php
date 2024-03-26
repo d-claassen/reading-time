@@ -25,12 +25,9 @@ class Schema_IntegrationTest extends \WP_UnitTestCase {
 	// with phpunit 10.
 	public function expectDeprecated() {
 	}
-
-	public function test_should_add_time_required_to_webpage(): void {
-		$post_id = self::factory()->post->create(
-			array(
-				'title'        => 'WebPage with estimated reading time',
-				'post_content' => <<<'EOL'
+	
+	private function get_post_content(): string {
+		return <<<'EOL'
 				Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live 
 				the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large 
 				language ocean. A small river named Duden flows by their place and supplies it with the necessary
@@ -46,7 +43,14 @@ class Schema_IntegrationTest extends \WP_UnitTestCase {
 				continued her way. On her way she met a copy. The copy warned the Little Blind Text, that
 				where it came from it would have been rewritten a thousand times and everything that was left
 				from its origin would be the word "and".
-				EOL,
+				EOL;
+	}
+
+	public function test_should_add_time_required_to_webpage(): void {
+		$post_id = self::factory()->post->create(
+			array(
+				'title'        => 'WebPage with estimated reading time',
+				'post_content' => $this->get_post_content(),
 			)
 		);
 
