@@ -93,6 +93,11 @@ class Schema_IntegrationTest extends \WP_UnitTestCase {
 		$webpage_piece = $this->get_piece_by_type( $schema_data['@graph'], 'WebPage' );
 
 		$this->assertArrayNotHasKey( 'timeRequired', $webpage_piece, 'timeRequired should not exist for WebPage' );
+		
+		$this->assertEmpty(
+			array_filter( $schema_data['@graph'], fn( $piece ) => ! in_array( 'Article', (array) $piece['@type'], true ) ),
+			'No Article on Page page'
+		);
 	}
 
 	private function get_schema_output( bool $debug_wpseo_head = false ): string {
