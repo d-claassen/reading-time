@@ -46,7 +46,7 @@ class Schema_IntegrationTest extends \WP_UnitTestCase {
 				EOL;
 	}
 
-	public function test_should_add_time_required_to_webpage(): void {
+	public function test_should_add_time_required_to_post_webpage(): void {
 		$post_id = self::factory()->post->create(
 			array(
 				'title'        => 'WebPage with estimated reading time',
