@@ -95,7 +95,7 @@ class Schema_IntegrationTest extends \WP_UnitTestCase {
 		$this->assertArrayNotHasKey( 'timeRequired', $webpage_piece, 'timeRequired should not exist for WebPage' );
 		
 		$this->assertEmpty(
-			array_filter( $schema_data['@graph'], fn( $piece ) => ! in_array( 'Article', (array) $piece['@type'], true ) ),
+			array_filter( $schema_data['@graph'], fn( $piece ) => in_array( 'Article', (array) $piece['@type'], true ) ),
 			'No Article on Page page'
 		);
 	}
