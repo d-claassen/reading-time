@@ -92,7 +92,7 @@ class Schema_IntegrationTest extends \WP_UnitTestCase {
 
 		$webpage_piece = $this->get_piece_by_type( $schema_data['@graph'], 'WebPage' );
 
-		$this->assertNotArrayHasKey( 'timeRequired', $webpage_piece, 'timeRequired should not exist for WebPage' );
+		$this->assertArrayNotHasKey( 'timeRequired', $webpage_piece, 'timeRequired should not exist for WebPage' );
 	}
 
 	private function get_schema_output( bool $debug_wpseo_head = false ): string {
