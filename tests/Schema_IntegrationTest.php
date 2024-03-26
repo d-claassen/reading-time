@@ -69,6 +69,31 @@ class Schema_IntegrationTest extends \WP_UnitTestCase {
 
 		$this->assertSame( 'PT1M', $webpage_piece['timeRequired'], 'timeRequired should be filled for WebPage' );
 	}
+	
+	public function test_should_not_add_time_required_to_page_webpage(): void {
+		$post_id = self::factory()->post->create(
+			array(
+				'title'        => 'WebPage without estimated reading time',
+				'post_content' => $this->get_post_content(),
+				'post_type'    => 'page',
+			)
+		);
+
+		// Update object to persist meta value to indexable.
+		self::factory()->post->update_object( $post_id, [] );
+
+		$this->go_to( \get_permalink( $post_id ) );
+
+		$schema_output = $this->get_schema_output();
+
+		$this->assertJson( $schema_output );
+
+		$schema_data = \json_decode( $schema_output, JSON_OBJECT_AS_ARRAY );
+
+		$webpage_piece = $this->get_piece_by_type( $schema_data['@graph'], 'WebPage' );
+
+		$this->assertNotArrayKeyExists( 'timeRequired', $webpage_piece, 'timeRequired should not exist for WebPage' );
+	}
 
 	private function get_schema_output( bool $debug_wpseo_head = false ): string {
 
