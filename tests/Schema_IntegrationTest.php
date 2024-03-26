@@ -127,7 +127,7 @@ class Schema_IntegrationTest extends \WP_UnitTestCase {
 	 * @return array{"@type": string} The matching schema.org piece.
 	 */
 	private function get_piece_by_type( $graph, $type ): array {
-		$nodes_of_type = array_filter( $graph, fn( $piece ) => $piece['@type'] === $type );
+		$nodes_of_type = array_filter( $graph, fn( $piece ) => ! empty( array_intersect( (array) $piece['@type'], (array) $type ) ) );
 
 		if ( empty( $nodes_of_type ) ) {
 			throw new InvalidArgumentException( 'No piece found for type' );
