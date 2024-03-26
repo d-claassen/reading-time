@@ -10,10 +10,6 @@ final class Schema_Integration {
 		\add_filter( 'wpseo_schema_webpage', [ $this, 'add_reading_time_to_webpage' ], 11, 2 );
 	}
 
-	private function should_add_post_data(): bool {
-		return \is_single() && \get_post_type() === 'post';
-	}
-
 	/**
 	 * Enhance the WebPage with a timeRequired property.
 	 *
@@ -26,7 +22,7 @@ final class Schema_Integration {
 	 */
 	public function add_reading_time_to_webpage( $webpage_data, $context ) {
 		\assert( $context instanceof Meta_Tags_Context );
-		if ( ! $this->should_add_post_data() ) {
+		if ( ! $context->has_article ) {
 			return $webpage_data;
 		}
 
