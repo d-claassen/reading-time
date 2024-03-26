@@ -66,8 +66,10 @@ class Schema_IntegrationTest extends \WP_UnitTestCase {
 		$schema_data = \json_decode( $schema_output, JSON_OBJECT_AS_ARRAY );
 
 		$webpage_piece = $this->get_piece_by_type( $schema_data['@graph'], 'WebPage' );
+		$article_piece = $this->get_piece_by_type( $schema_data['@graph'], 'Article' );
 
 		$this->assertSame( 'PT1M', $webpage_piece['timeRequired'], 'timeRequired should be filled for WebPage' );
+		$this->assertArrayNotHasKey( 'timeRequired', $article_piece, 'timeRequired should not exist for Article' );
 	}
 	
 	public function test_should_not_add_time_required_to_page_webpage(): void {
