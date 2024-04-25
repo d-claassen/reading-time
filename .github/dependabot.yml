@@ -33,4 +33,5 @@ updates:
           - "yoast/yoastcs"
           - "phpcsstandards/*"
           - "phpcompatibility/*"
+          - "squizlabs/*"
           
