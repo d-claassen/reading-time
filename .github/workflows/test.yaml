@@ -62,7 +62,7 @@ jobs:
         run: npx playwright install chromium firefox webkit --with-deps
 
       - name: Install WordPress and start the server
-        run: npm run wp-env start --xdebug || npm run wp-env start --xdebug
+        run: npm run wp-env start -- --xdebug || npm run wp-env start -- --xdebug
 
       - name: 'Debug wp-env'
         run: |
