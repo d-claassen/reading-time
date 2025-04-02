@@ -81,5 +81,5 @@ jobs:
       - name: Run Playwright tests
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
-        run: npm run test:e2e -- --passWithNoTests
+        run: npm run test:e2e -- --pass-with-no-tests
 
