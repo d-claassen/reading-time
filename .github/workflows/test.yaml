@@ -75,11 +75,11 @@ jobs:
           npm run wp-env run -- --env-cwd='wp-content/plugins/reading-time' tests-wordpress composer -- --version
           npm run wp-env run -- --env-cwd='wp-content/plugins/reading-time' tests-wordpress ./vendor/bin/phpunit -- --version
 
+      - name: Run PHPUnit tests
+        run: npm run wp-env run -- --env-cwd='wp-content/plugins/reading-time' tests-wordpress composer test -- --coverage-text --display-errors --display-warnings'
+
       - name: Run Playwright tests
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
-        run: npm run test:e2e
-
-      - name: Run PHPUnit tests
-        run: npm run wp-env run -- --env-cwd='wp-content/plugins/reading-time' tests-wordpress composer test
+        run: npm run test:e2e -- --passWithNoTests
 
