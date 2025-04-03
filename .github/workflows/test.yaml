@@ -74,7 +74,6 @@ jobs:
           npm run wp-env run -- tests-cli wp plugin list
           npm run wp-env run -- tests-wordpress composer -- --version
           npm run wp-env run -- tests-wordpress phpunit -- --version
-          npm run wp-env run -- tests-cli phpunit -- --version
 
       - name: Run PHPUnit tests
         run: npm run wp-env run -- --env-cwd='wp-content/plugins/reading-time' tests-wordpress composer test -- -- --coverage-text --display-errors --display-warnings
