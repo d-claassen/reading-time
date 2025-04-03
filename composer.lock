@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "83a7f660a8e4b850fe1129aa7c346d7b",
+    "content-hash": "8b24ff982e4a08d9b255c911497ef013",
     "packages": [],
     "packages-dev": [
         {
@@ -3674,16 +3674,16 @@
         },
         {
             "name": "yoast/wordpress-seo",
-            "version": "22.6",
+            "version": "24.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Yoast-dist/wordpress-seo.git",
-                "reference": "a800ab7c084c1caab9624a62c06e44b3a9bcdb83"
+                "reference": "9dc2f9b658453daea8d600b5ffd2964f1d075ecc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Yoast-dist/wordpress-seo/zipball/a800ab7c084c1caab9624a62c06e44b3a9bcdb83",
-                "reference": "a800ab7c084c1caab9624a62c06e44b3a9bcdb83",
+                "url": "https://api.github.com/repos/Yoast-dist/wordpress-seo/zipball/9dc2f9b658453daea8d600b5ffd2964f1d075ecc",
+                "reference": "9dc2f9b658453daea8d600b5ffd2964f1d075ecc",
                 "shasum": ""
             },
             "require": {
@@ -3700,7 +3700,7 @@
                 "psr/log": "^1.0",
                 "symfony/config": "^3.4",
                 "symfony/dependency-injection": "^3.4",
-                "wordproof/wordpress-sdk": "1.3.5",
+                "wpackagist-plugin/google-site-kit": "dev-trunk",
                 "yoast/wp-test-utils": "^1.2",
                 "yoast/yoastcs": "^3.1.0"
             },
@@ -3711,6 +3711,13 @@
                 "ext-mbstring": "For cyrillic support"
             },
             "type": "wordpress-plugin",
+            "extra": {
+                "installer-paths": {
+                    "vendor/{$name}": [
+                        "wpackagist-plugin/google-site-kit"
+                    ]
+                }
+            },
             "autoload": {
                 "classmap": [
                     "admin/",
@@ -3744,7 +3751,7 @@
                 "source": "https://github.com/Yoast/wordpress-seo",
                 "wiki": "https://github.com/Yoast/wordpress-seo/wiki"
             },
-            "time": "2024-04-30T07:59:16+00:00"
+            "time": "2025-04-02T10:16:02+00:00"
         },
         {
             "name": "yoast/yoastcs",
