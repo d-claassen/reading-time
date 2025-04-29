@@ -70,11 +70,11 @@ jobs:
       - name: Test 2
         run: ls -la
 
-      - name: 'Archive plugin.zip'
+      - name: 'Archive plugin zip artifact'
         uses: actions/upload-artifact@v4
         with:
-          name: 'reading-time'
-          path: 'reading-time.zip'
+          name: 'dc23-reading-time'
+          path: 'dc23-reading-time.zip'
 
       - name: 'Release'
         uses: softprops/action-gh-release@v2
