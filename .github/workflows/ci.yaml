@@ -95,10 +95,10 @@ jobs:
         run: 'composer install --no-dev --prefer-dist --no-progress --no-suggest --optimize-autoloader'
 
       - name: 'Zip it'
-        run: 'npm run-script plugin-zip -- --help'
+        run: 'npm run-script plugin-zip'
 
-      - name: 'Archive theme.zip'
+      - name: 'Archive plugin zip artifact'
         uses: actions/upload-artifact@v4
         with:
-          name: 'dennisclaassen2023'
-          path: 'dennisclaassen2023.zip'
+          name: 'dc23-reading-time'
+          path: 'dc23-reading-time.zip'

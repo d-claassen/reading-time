@@ -1,5 +1,5 @@
 {
-	"name": "reading-time",
+	"name": "dc23-reading-time",
 	"version": "0.2.0",
 	"description": "A Gutenberg block to show the reading time of a page.",
 	"author": "The WordPress Contributors",
@@ -12,13 +12,9 @@
 	"bugs": "",
 	"files": [
 		"readme.*",
-		"functions.php",
-		"style.css",
-		"theme.json",
+		"dc23-reading-time.php",
 		"build/**",
-		"parts/**",
 		"src/**",
-		"templates/**",
 		"vendor/**"
 	],
 	"main": "build/index.js",
